@@ -1,0 +1,61 @@
+Query con JOIN:
+
+Esercizio 1:
+select students.name as nome, students.surname as cognome , students.enrolment_date as data_iscrizione, 
+degrees.name as corso_di_laurea
+from students
+join degrees 
+on students.degree_id = degrees.id 
+where degrees.name = 'Corso di Laurea in Economia'
+order by students.name;
+
+Esercizio 2:
+select departments.name as nome, degrees.name as corso, degrees.level as tipologia_corso, degrees.address as indirizzo
+from degrees 
+join departments 
+on degrees.department_id = departments.id 
+where departments.name  = 'Dipartimento di Neuroscienze';
+
+Esercizio 3:
+select teachers.name as nome, teachers.surname as cognome, courses.id as numero_corso, courses.name as nome_corso, courses.period as durata_corso
+from teachers
+join course_teacher 
+on course_teacher.teacher_id  = teachers.id
+join courses
+on course_teacher.course_id  = courses.id
+where teachers.id= 44;
+
+Eserizio 4:
+select students.surname as cognome, students.name as nome, students.registration_number as matricola, degrees.name as corso, degrees.level as periodo,
+departments.name as dipartimento
+from students
+join degrees
+on students.degree_id = degrees.id 
+join departments
+on degrees.department_id = departments.id
+order by students.surname, students.name;
+
+Esercizio 5:
+select degrees.name  as nome_corso_di_laurea, degrees.level as periodo, courses.name as nome, courses.period as semestre, courses.year as anno,
+teachers.name as nome_docente, teachers.surname as cognome_insegnante, teachers.office_number as numero_ufficio
+from degrees
+join courses
+on courses.degree_id = degrees.id
+join course_teacher
+on course_teacher.course_id = courses.id 
+join teachers
+on course_teacher.teacher_id = teachers.id
+order by courses.name; 
+
+Esercizio 6:
+select distinct teachers.id , teachers.name as nome_docente, teachers.surname as cognome_docente, departments.name  
+from teachers 
+join course_teacher
+on course_teacher.teacher_id = teachers.id 
+join courses 
+on course_teacher.course_id = courses.id 
+join degrees
+on courses.degree_id = degrees.id
+join departments
+on degrees.department_id = departments.id 
+where departments.name ='Dipartimento di Matematica';
